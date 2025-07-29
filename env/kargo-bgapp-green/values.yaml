@@ -1,7 +1,7 @@
 app:
   fullnameOverride: app-green
 
-  replicaCount: 3
+  replicaCount: "0"
 
   podAnnotations:
     env: green
