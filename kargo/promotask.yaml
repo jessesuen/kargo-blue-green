@@ -39,12 +39,12 @@ spec:
       updates:
       - key: app.image.tag
         value: ${{ imageFrom( vars.image ).Tag }}
-      - key: app.image.replicaCount
+      - key: app.replicaCount
         value: ${{ vars.replicaCount }}
   - uses: git-commit
     config:
       path: ./src
-      message: Update kargo-bgapp-${{ task.outputs.ingressService.desired }} to ${{ imageFrom( vars.image ).Tag }} and scale up
+      message: "1/3: Update `app-${{ task.outputs.ingressService.desired }}` to `${{vars.image}}:${{imageFrom(vars.image).Tag}}``, scale to ${{vars.replicaCount}} replicas"
   - uses: git-push
     config:
       path: ./src
@@ -61,11 +61,11 @@ spec:
       path: ./src/env/kargo-bgapp-ingress/values.yaml
       updates:
       - key: ingress.service.name
-        value: kargo-bgapp-${{ task.outputs.ingressService.desired }}
+        value: app-${{ task.outputs.ingressService.desired }}
   - uses: git-commit
     config:
       path: ./src
-      message: Update ingress to kargo-bgapp-${{ task.outputs.ingressService.desired }}
+      message: "2/3: Update ingress to `app-${{ task.outputs.ingressService.desired }}`"
   - uses: git-push
     config:
       path: ./src
@@ -81,12 +81,12 @@ spec:
     config:
       path: ./src/env/kargo-bgapp-${{ task.outputs.ingressService.previous }}/values.yaml
       updates:
-      - key: app.image.replicaCount
+      - key: app.replicaCount
         value: "0"
   - uses: git-commit
     config:
       path: ./src
-      message: Scale down ${{ task.outputs.ingressService.previous }}
+      message: "3/3: Scale down `app-${{ task.outputs.ingressService.previous }}` to 0"
   - uses: git-push
     config:
       path: ./src
