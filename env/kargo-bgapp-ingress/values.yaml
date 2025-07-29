@@ -1,6 +1,6 @@
 ingress:
   service:
-    name: app-blue
+    name: app-green
 
   ingress:
     hosts:
