@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/akuity/kargo-blue-green.git
+      repoURL: https://github.com/jessesuen/kargo-blue-green.git
       revision: HEAD
       directories:
       - path: env/*
@@ -18,7 +18,7 @@ spec:
     spec:
       project: kargo-blue-green
       source:
-        repoURL: https://github.com/akuity/kargo-blue-green.git
+        repoURL: https://github.com/jessesuen/kargo-blue-green.git
         targetRevision: HEAD
         path: ./env/{{path.basename}}
       destination:

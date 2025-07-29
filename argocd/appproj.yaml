@@ -15,4 +15,4 @@ spec:
   - group: '*'
     kind: '*'
   sourceRepos:
-  - https://github.com/akuity/kargo-blue-green.git
+  - https://github.com/*/kargo-blue-green.git
